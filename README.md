@@ -1,1 +1,4 @@
-# google_it_automation_cert
+## Google IT Automation with Python Professional Certificate
+
+Sample code for final projects.
+
