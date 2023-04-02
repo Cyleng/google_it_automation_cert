@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+###
+
+###
 
 import re
 import sys
@@ -43,15 +46,11 @@ f.close()
 error_sorted = sorted(error.items(), key = operator.itemgetter(1), reverse = True)
 per_user_sorted = sorted(per_user.items(), key = operator.itemgetter(0))
 
-
-print(error_sorted)
-
-print(per_user_sorted)
-
 #write result to csv
 
 with open("error_message.csv", "w", newline = "") as e_csv:
-    error_sorted.insert(0,("Error", "Count"))
+    header = csv.DictWriter(e_csv, delimiter=",", fieldnames = ["Error", "Count"])
+    header.writeheader()
     for key, value in error_sorted:
         e_csv.write(str(key) + "," + str(value) + "\n")
 e_csv.close()
@@ -61,12 +60,4 @@ with open("user_statistics.csv", "w", newline = "") as user_csv:
     header.writeheader()
     for key, value in per_user_sorted:
         user_csv.write(str(key) + "," + str(value["INFO"]) + "," + str(value["ERROR"]) + "\n")
-
 user_csv.close()
-    #print(per_user_sorted)
-
-
-#with open("user_statistics.csv", "w", newline = "") as user_csv:
-#    for key, value in per_user_sorted:
-#        user_stat_csv.write(str(key) + "," + str(value["INFO"]) + "," + str(value["ERROR"] + "\n")
-#user_csv.close()
